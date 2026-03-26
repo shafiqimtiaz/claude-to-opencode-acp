@@ -1,5 +1,23 @@
 [English](README.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
+Option 1 — ACP bridge skill (the proper way)
+There's a Claude Code skill called `invoke-opencode-acp` that delegates tasks from Claude Code to an opencode subagent via the ACP protocol, with the explicit goal of saving tokens by using GLM-4.7/Qwen instead of paid Claude tokens. GitHub
+bash
+
+```bash
+# Install
+npm install -g opencode
+git clone https://github.com/phonowell/invoke-opencode-acp
+cp -r invoke-opencode-acp/skills/invoke-opencode-acp ~/.claude/skills/
+```
+
+Then inside Claude Code you can say:
+```
+Use the invoke-opencode-acp skill to have glm-worker refactor src/utils.ts
+```
+
+The skill fires `acp_client.cjs` which talks to opencode's ACP server, hands the task to your `glm-worker` subagent, and pipes the result back.
+
 # invoke-opencode-acp
 
 **A skill for [Claude Code CLI](https://claude.ai/code)** that saves thousands of tokens by delegating complex tasks to OpenCode subagent.
